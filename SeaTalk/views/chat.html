@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SeaTalk - Direct Chat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      background: #f0f2f5;
+    }
+    aside {
+      width: 300px;
+      background: #0077b6;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+    aside header {
+      padding: 20px;
+      font-weight: bold;
+      background: #023e8a;
+      font-size: 1.2rem;
+    }
+    #groupsBtn {
+      margin: 10px 20px;
+      padding: 10px;
+      background: #0096c7;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    #groupsBtn:hover { background: #00b4d8; }
+    #contactsList {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    #contactsList li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    #contactsList li:hover { background: #0096c7; }
+    .delete-btn {
+      background: #023e8a; 
+      border: none;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .delete-btn:hover { background: #0353a4; } 
+    .add-contact {
+      padding: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .add-contact input, .add-contact button {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: none;
+      border-radius: 4px;
+    }
+    .add-contact input { outline: none; }
+    .add-contact button {
+      background: #023e8a;
+      color: #fff;
+      cursor: pointer;
+    }
+    .add-contact button:hover { background: #0353a4; }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #e6f2ff;
+    }
+    header {
+      background: #0077b6;
+      color: #fff;
+      padding: 20px;
+      font-weight: bold;
+    }
+    #messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .message {
+      max-width: 60%;
+      padding: 12px 18px;
+      margin: 5px 0;
+      border-radius: 20px;
+      line-height: 1.4;
+    }
+    .own { background: #0077b6; color: #fff; align-self: flex-end; border-bottom-right-radius: 0; }
+    .other { background: #fff; color: #333; align-self: flex-start; border: 1px solid #ddd; border-bottom-left-radius: 0; }
+    #form {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 15px 20px;
+      background: #f0f2f5;
+      border-top: 1px solid #ddd;
+    }
+    #form input[type="text"] {
+      flex: 1;
+      padding: 12px 20px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      outline: none;
+      font-size: 1rem;
+    }
+    #form input[type="file"] {
+      margin-left: 10px;
+    }
+    #form button {
+      margin-left: 10px;
+      padding: 12px 20px;
+      background: #0077b6;
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #form button:hover { background: #023e8a; }
+  </style>
+</head>
+<body>
+  <aside>
+    <header>SeaTalk</header>
+    <button id="groupsBtn">Go to Groups</button>
+    <ul id="contactsList">
+    </ul>
+    <div class="add-contact">
+      <form id="addContactForm">
+        <input type="tel" name="phone" placeholder="Add contact phone" required />
+        <button type="submit">Add Contact</button>
+      </form>
+    </div>
+  </aside>
+
+  <main>
+    <header>Direct Chat</header>
+    <div id="messages"></div>
+    <form id="form">
+      <input id="input" type="text" placeholder="Type a message..." />
+      <input type="file" id="fileUpload" />
+      <button type="submit">➤</button>
+    </form>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/chat.js"></script>
+</body>
+</html>
